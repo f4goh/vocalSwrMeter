@@ -1,32 +1,24 @@
-ROS-mètre HF pour déficient visuel
+# ROS-mètre HF pour déficient visuel
 
 Anthony Le Cren F4GOH - KF4GOH
 
-**Caractéristiques du ROS-mètre :**
+** Caractéristiques du ROS-mètre : **
 
-• Gamme de mesures : 1 à 30 MHz.
+- Gamme de mesures : 1 à 30 MHz.
+- Puissance max 100 W.
+- Arduino UNO.
+- Module MP3 Catalex yx5300.
+- Fichiers sons personnalisables.
+- Haut-parleurs de PC.
+- Mesure avec un coupleur tandem et deux AD8307.
+- Coût entre 20 € et 30 € suivant votre stock (Hors boitier).
+- Le PCB du coupleur est disponible, si vous êtes intéressés, merci de m'envoyer un mail à : [f4goh@orange.fr](mailto:f4goh@orange.fr)
 
-• Puissance max 100 W.
-
-• Arduino UNO.
-
-• Module MP3 Catalex yx5300.
-
-• Fichiers sons personnalisables.
-
-• Haut-parleurs de PC.
-
-• Mesure avec un coupleur tandem et deux AD8307.
-
-• Coût entre 20 € et 30 € suivant votre stock (Hors boitier).
-
-Le PCB du coupleur est disponible, si vous êtes intéressés, merci de m'envoyer un mail à : [f4goh@orange.fr](mailto:f4goh@orange.fr)
-
-**1 Introduction**
+** 1 Introduction **
 
 Lors du salon HAMEXPO 2019 au Mans, j'ai pu présenter à l'association UNARAF (Union Nationale des Aveugles Radio Amateurs de France) un ROS-mètre HF pour déficient visuel. J'ai en effet tout de suite tenu à participer au HACKATHON afin de présenter mon projet. Le thème est judicieusement choisi, car la plupart du temps les projets dédiés aux personnes handicapées ne sont pas assez mis en avant. J'espère d'ailleurs qu'il y aura plus de participants lors des prochaines éditions. Après quelques modifications du code source, le projet est maintenant prêt à être publié. De plus, cela intéressera probablement les radioamateurs désireux d'utiliser un lecteur MP3 pour d'autres applications comme une balise vocale, ou cela ajoutera un « plus » dans la commande d'un relais VHF ou UHF.
 
-**2 Description du schéma **
+** 2 Description du schéma **
 
 ![SCH](images/swr.png)
 
@@ -59,6 +51,8 @@ Si le mode automatique est sélectionné, le ROS-mètre va détecter un signal H
 Dans le mode manuel, il faudra appuyer sur le bouton « Bp manual » afin de connaître la puissance et le ROS. Cela permet de ne pas perturber le QSO en cours par rapport au mode automatique plus utile pour les réglages ou les vérifications d'adaptation d'impédance de l'antenne.
 
 **3 Le lecteur MP3 Catalex yx5300**
+
+![catalex](images/catalex.png)
 
 J'ai cherché un module de lecteur MP3 bon marché et facile à mettre en œuvre. La commande de lecture des fichiers mp3 stockés dans une carte micro-SD se fait grâce à une liaison série à une vitesse de 9600 bauds. Utilisez un casque ou des haut-parleurs de PC sur la prise jack 3,5 mm (sortie audio du module MP3).
 
@@ -94,6 +88,8 @@ Table des fichiers mp3 utilisés dans le répertoire « 01 » :
 | 021.mp3 | QRT | 679 |
 | 022.mp3 | Ros-mètre sous tension | 1593 |
 
+![Audacity](images/audacity.png)
+
 Des exemples de fichiers mp3 sont disponibles dans mon Github (1) : un répertoire appelé 01 contenant les mots en français, un autre répertoire appelé 02 contenant une version en anglais.
 
 Il faudra couper les mots au plus juste afin d'éviter les saccades dans l'enchaînement des annonces vocales.
@@ -116,7 +112,13 @@ L'ensemble transformateur et atténuateur réalise une atténuation théorique d
 
 Le transformateur est réalisé avec trois T50-2 côte à côte et 26 tours de fil émaillé (diamètre 0,6 mm)
 
-**swr_photo.jpg**
+![swr](images/swr_photo.jpg)
+
+![swrsch](images/swrsch.png)
+
+![swrcp](images/coupleur.png)
+
+![swrcoup](images/coupleur-seul.png)
 
 Il n'est pas obligatoire d'utiliser ce coupleur en particulier. Par contre, il est nécessaire que les tensions continues injectées dans l'Arduino UNO (permettant de mesurer les puissances directes et réfléchies) respectent la valeur maximale AREF du convertisseur analogique numérique (CAN) soit 2,5 V. Évitez au possible d'utiliser la tension de référence 5 V interne à l'Arduino pour le CAN, cela réduit la plage de mesure et les résultats sont fluctuants et moins précis.
 
@@ -164,6 +166,12 @@ return (100 \* (float) N) / 1024 - 90 + OffsetdBmBridge;
 
 }
 
+![dir](images/direct.png)
+
+
+![rev](images/reverse.png)
+
+
 Cette formule est issue de la documentation constructeur de l'AD8307 et du CAN de l'Arduino. La configuration par défaut est amplement suffisante pour faire des essais.
 
 Avec un émetteur et le ROS-mètre sur une charge de 50 ohms, injecter une porteuse HF de 7 MHz de 1 watt. Ajuster la valeur de OffsetdBmBridge de telle manière que la puissance corresponde (en général plus ou moins 2 dB autour de 45).
@@ -200,7 +208,6 @@ Le montage est facile à construire et les composants se trouvent facilement sur
 
 Anthony
 
-- Github : <https://github.com/f4goh/vocalSwrMeter>
 
 **6 Liens eBay / AliExpress** \*
 
